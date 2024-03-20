@@ -1,2 +1,14 @@
 # AirBnB_clone_v2
-i will try my best
+
+    - This project will use ORM in AirBnB_Clone
+
+# Run the console
+
+```bash
+    ./console.py
+```
+
+## Contribution
+
+1 - Waheed Khaled
+2 - Deyaa Alshapshiri
