@@ -155,7 +155,7 @@ class HBNBCommand(cmd.Cmd):
                 if val.isdigit():
                     val: int = int(val)
                 # Handle case where the value is a float
-                elif "." in val and self.__create_float(val):
+                elif self.__create_float(val):
                     val: float = float(val)
                 # defualt:
                 else:
@@ -184,7 +184,7 @@ class HBNBCommand(cmd.Cmd):
             return
         params = []
         # Get attributes/values
-        if len(cmd_input) > 2:
+        if len(cmd_input) > 1:
             params = cmd_input[1:]
         # Currently do create can't handle the parameters appropriatly
         new_instance: BaseModel = HBNBCommand.classes[className]()
