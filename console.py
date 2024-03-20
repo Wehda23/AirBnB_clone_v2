@@ -10,7 +10,7 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
-
+import re
 
 class HBNBCommand(cmd.Cmd):
     """Contains the functionality for the HBNB console"""
@@ -123,78 +123,45 @@ class HBNBCommand(cmd.Cmd):
         """Overrides the emptyline method of CMD"""
         pass
 
-    # Create methods
-    def __create_float(self, value: str) -> bool:
-        """
-        Creates a Float instance and stores it
-
-        Return:
-            - True incase value is a float other wise False
-        """
-        try:
-            float(value)
-            return True
-        except Exception as e:
-            return False
-
-    def __create_str(self, value: str) -> None:
-        """
-        Creates an integer instance
-        """
-        return str(value)
-
-    def __create_parameters(self, instance, cmd) -> None:
-        """
-        Method to handle CMD parameters for create
-        """
-        # Loop over cmd
-        for param in cmd:
-            if "=" in param:
-                key, val = param.split("=")
-                # Handle case where the value is an integer
-                if val.isdigit():
-                    val: int = int(val)
-                # Handle case where the value is a float
-                elif self.__create_float(val):
-                    val: float = float(val)
-                # defualt:
-                else:
-                    if '"' in val:
-                        val: str = val.replace('"', "")
-                    elif "'" in val:
-                        val: str = val.replace("'", "")
-                    # Change _ with " "
-                    if "_" in val:
-                        val: str = val.replace("_", " ")
-                # Check if parameter is valid
-                setattr(instance, key, val)
-
     def do_create(self, args):
         """Create an object of any class"""
         if not args:
             print("** class name missing **")
             return
+        # Split the arguments by spaces while preserving quoted strings
+        params = re.findall(r'(?:[^\s,"]|"(?:\\.|[^"])*")+', args)
 
-        cmd_input = args.split(" ")
-        # get class name
-        className: str = cmd_input[0]
-        # Check if class name exists amongst the modules of console.
-        if className not in HBNBCommand.classes:
+        # Extract class name and parameters
+        class_name = params[0]
+        parameters = params[1:]
+
+        # Check if class name exists
+        if class_name not in self.classes:
             print("** class doesn't exist **")
             return
-        params = []
-        # Get attributes/values
-        if len(cmd_input) > 1:
-            params = cmd_input[1:]
-        # Currently do create can't handle the parameters appropriatly
-        new_instance: BaseModel = HBNBCommand.classes[className]()
-        # Check params
-        if params:
-            self.__create_parameters(new_instance, params)
-        # Save to storage.
-        storage.save()
+
+        # Create a new instance of the specified class
+        new_instance = self.classes[class_name]()
+
+        # Parse and set object attributes from parameters
+        for param in parameters:
+            try:
+                key, value = param.split('=')
+                value = re.sub(r'\\(.)', r'\1', value)  # Unescape escaped characters
+                value = value.replace('_', ' ')  # Replace underscores with spaces
+                if value.startswith('"') and value.endswith('"'):
+                    value = value[1:-1]  # Remove surrounding double quotes
+                elif '.' in value:
+                    value = float(value)  # Convert to float if contains dot
+                else:
+                    value = int(value)  # Convert to integer by default
+                setattr(new_instance, key, value)
+            except ValueError:
+                print(f"Invalid parameter: {param}")
+
+        # Save the new instance to storage
+        new_instance.save()
         print(new_instance.id)
-        storage.save()
 
     def help_create(self):
         """Help information for the create method"""
