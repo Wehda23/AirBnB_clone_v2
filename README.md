@@ -1,6 +1,6 @@
 # AirBnB_clone_v2
 
-    - This project will use ORM in AirBnB_Clone
+This project will use ORM in AirBnB_Clone
 
 # Run the console
 
@@ -10,5 +10,5 @@
 
 ## Contribution
 
-1 - Waheed Khaled
-2 - Deyaa Alshapshiri
+1. Waheed Khaled
+2. Deyaa Alshapshiri
