@@ -112,7 +112,29 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """ Overrides the emptyline method of CMD """
         pass
+    
+    ## Create methods
+    def __create_float(self, value: str) -> None:
+        """
+        Creates a Float instance and stores it
 
+        Return:
+            - Nothing.
+        """
+        return float(value)
+    
+    def __create_str(self, value: str) -> None:
+        """
+        Creates an integer instance
+        """
+        return str(value)
+    
+    def __create_parameters(self, cmd: str) -> None:
+        """
+        Method to handle CMD parameters for create
+        """
+        return
+    
     def do_create(self, args):
         """ Create an object of any class"""
         if not args:
