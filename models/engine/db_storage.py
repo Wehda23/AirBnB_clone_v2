@@ -7,11 +7,9 @@ from models.user import User
 from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
-
-import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
-
+import os
 
 class DBStorage:
     """This class represents a database storage using SQL"""
