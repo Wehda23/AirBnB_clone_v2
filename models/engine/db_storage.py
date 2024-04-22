@@ -11,6 +11,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 import os
 
+
 class DBStorage:
     """This class represents a database storage using SQL"""
 
@@ -61,8 +62,7 @@ class DBStorage:
     def delete(self, obj=None):
         """Method used to remove an object from database"""
         if obj is not None:
-            self.__session.query(type(obj)).\
-                filter(type(obj).id == obj.id).delete(
+            self.__session.query(type(obj)).filter(type(obj).id == obj.id).delete(
                 synchronize_session=False
             )
 
@@ -84,10 +84,7 @@ class DBStorage:
     def reload(self):
         """Method used to load data from database"""
         Base.metadata.create_all(self.__engine)
-        SessionFactory = sessionmaker(
-            bind=self.__engine,
-            expire_on_commit=False
-        )
+        SessionFactory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         self.__session = scoped_session(SessionFactory)()
 
     def close(self):

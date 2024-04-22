@@ -8,6 +8,7 @@ from sqlalchemy.orm import relationship
 
 class City(BaseModel, Base):
     """City Module"""
+
     __tablename__ = "cities"
     name = (
         Column(String(128), nullable=False)
@@ -20,11 +21,7 @@ class City(BaseModel, Base):
         else ""
     )
     places = (
-        relationship(
-            "Place",
-            cascade="all, delete, delete-orphan",
-            backref="cities"
-        )
+        relationship("Place", cascade="all, delete, delete-orphan", backref="cities")
         if os.getenv("HBNB_TYPE_STORAGE") == "db"
         else None
     )
