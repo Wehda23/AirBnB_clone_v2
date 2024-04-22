@@ -3,13 +3,13 @@
 File that contains a flask api to call all states
 """
 from flask import Flask, render_template
-from ..models import storage
+from models import storage
 
 # Flask Application
 app = Flask(__name__)
 
 
-#Api
+# Api
 @app.route("/states_list", strict_slashes=False)
 def states_view() -> object:
     """
@@ -27,5 +27,5 @@ def teardown_db(exception):
     storage.close()
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000")
