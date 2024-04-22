@@ -72,3 +72,9 @@ class FileStorage:
             # check if object exists
             if obj_key in self.__objects:
                 self.__objects.pop(obj_key)
+
+    def close(self) -> None:
+        """
+        Method to call reload() method for deserializing the JSON file to objects
+        """
+        self.reload()

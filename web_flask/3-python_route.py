@@ -6,7 +6,7 @@ from flask import Flask
 
 
 # Define application
-app: Flask = Flask(__name__)
+app = Flask(__name__)
 
 
 # Define route for the root url "/"
