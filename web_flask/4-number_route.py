@@ -40,9 +40,9 @@ def python_hbnb(text: str = "is cool") -> str:
 
 # Define route for the root url "/"
 @app.route("/number/<int:n>", strict_slashes=False)
-def c_hbnb(n: int) -> str:
+def number_hbnb(n: int) -> str:
     """Displays A n message"""
-    return "C {}".format(n)
+    return "{} is a number".format(n)
 
 
 # Main
