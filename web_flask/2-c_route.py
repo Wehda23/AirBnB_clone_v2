@@ -25,7 +25,7 @@ def hbnb() -> str:
 
 # Define route for the root url "/"
 @app.route("/c/<text>", strict_slashes=False)
-def hbnb(text: str) -> str:
+def c_hbnb(text: str) -> str:
     """Displays A text message"""
     return "C {}".format(text.replace("_", " "))
 
