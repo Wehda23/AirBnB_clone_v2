@@ -31,7 +31,8 @@ def c_hbnb(text: str) -> str:
 
 
 # Define route for the root url "/"
-@app.route("/c/<text>", strict_slashes=False)
+@app.route("/python", strict_slashes=False)
+@app.route("/python/<text>", strict_slashes=False)
 def python_hbnb(text: str = "is cool") -> str:
     """Displays A text message"""
     return "Python {}".format(text.replace("_", " "))
