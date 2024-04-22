@@ -49,6 +49,7 @@ def template_number(n: int) -> str:
     """Displays A n message"""
     return render_template("5-number.html", number=n)
 
+
 # Main
 if __name__ == "__main__":
     # Start Flask Server
