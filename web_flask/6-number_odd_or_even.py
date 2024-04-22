@@ -53,7 +53,7 @@ def template_number(n: int) -> str:
 @app.route("/number_odd_or_even/<int:n>", strict_slashes=False)
 def odd_even_tempalte(n: int) -> str:
     """Displays A n message"""
-    return render_template("6-number_odd_or_even.html", number=n)
+    return render_template("6-number_odd_or_even.html", name=n)
 
 
 # Main
