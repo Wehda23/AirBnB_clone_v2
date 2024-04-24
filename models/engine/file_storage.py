@@ -68,7 +68,7 @@ class FileStorage:
         """Method to delete an object from __objects"""
         # If object is None, method should do nothing
         if obj:
-            obj_key: str = obj.to_dict()["__class__"] + "." + obj.id
+            obj_key = obj.to_dict()["__class__"] + "." + obj.id
             # check if object exists
             if obj_key in self.__objects:
                 self.__objects.pop(obj_key)
